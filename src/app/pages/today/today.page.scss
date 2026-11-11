@@ -1,0 +1,110 @@
+.page {
+  padding: 8px 16px 32px;
+}
+
+.date {
+  margin: 0 0 16px;
+  color: var(--ion-color-medium);
+  font-size: 0.95rem;
+}
+
+.summary {
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.summary h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+}
+
+.progress-track {
+  margin-top: 12px;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ion-color-primary);
+}
+
+.done-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(var(--ion-color-primary-rgb), 0.16);
+  font-weight: 600;
+}
+
+.exercise-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.exercise-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 1px solid var(--ion-color-step-150, rgba(255, 255, 255, 0.12));
+  border-radius: 16px;
+  background: var(--ion-color-step-50, rgba(255, 255, 255, 0.04));
+  color: inherit;
+  text-align: left;
+}
+
+.exercise-card.complete {
+  border-color: var(--ion-color-primary);
+}
+
+.icon-wrap {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(var(--ion-color-primary-rgb), 0.16);
+  font-size: 1.4rem;
+}
+
+.exercise-copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exercise-copy strong {
+  font-size: 1.05rem;
+}
+
+.exercise-copy span {
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}

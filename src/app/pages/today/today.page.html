@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Daily 100</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Daily 100</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page">
+    <p class="date">{{ todayLabel() }}</p>
+
+    <div class="summary" aria-live="polite">
+      <div class="summary-row">
+        <h2>{{ workout.totalCompletedReps() }} / {{ totalReps }} reps</h2>
+        @if (workout.streak() > 0) {
+          <ion-badge color="primary" class="streak">
+            <ion-icon aria-hidden="true" name="flame-outline"></ion-icon>
+            {{ workout.streak() }}-day streak
+          </ion-badge>
+        }
+      </div>
+      <ion-note>
+        {{ workout.totalCompletedSets() }} of {{ totalSets }} sets
+      </ion-note>
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Today's total reps"
+        [attr.aria-valuenow]="workout.totalCompletedReps()"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="totalReps"
+      >
+        <div class="progress-fill" [style.width.%]="workout.percentComplete()"></div>
+      </div>
+    </div>
+
+    @if (workout.isDayComplete()) {
+      <p class="done-banner" role="status">
+        <ion-icon aria-hidden="true" name="trophy-outline"></ion-icon>
+        All 400 reps done. Rest up.
+      </p>
+    }
+
+    <ul class="exercise-list">
+      @for (exercise of workout.progress(); track exercise.id) {
+        <li>
+          <button
+            type="button"
+            class="exercise-card"
+            [class.complete]="exercise.done"
+            (click)="open(exercise.id)"
+            [attr.aria-label]="
+              exercise.name +
+              ', ' +
+              exercise.completedSets +
+              ' of 10 sets, ' +
+              exercise.completedReps +
+              ' of 100 reps'
+            "
+          >
+            <span class="icon-wrap" aria-hidden="true">
+              <ion-icon [name]="exercise.icon"></ion-icon>
+            </span>
+            <span class="exercise-copy">
+              <strong>{{ exercise.name }}</strong>
+              <span>
+                {{ exercise.completedSets }}/10 sets · {{ exercise.completedReps }}/100
+              </span>
+            </span>
+            <ion-icon aria-hidden="true" name="chevron-forward"></ion-icon>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <ion-button expand="block" size="large" (click)="start()">
+      @if (workout.isDayComplete()) {
+        Review workout
+      } @else if (workout.totalCompletedSets() > 0) {
+        Continue
+      } @else {
+        Start
+      }
+    </ion-button>
+  </div>
+</ion-content>

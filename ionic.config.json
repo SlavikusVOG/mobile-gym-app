@@ -1,0 +1,7 @@
+{
+  "name": "daily100",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

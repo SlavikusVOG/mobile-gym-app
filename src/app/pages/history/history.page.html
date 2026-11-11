@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">History</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page">
+    <section class="streak-card" aria-live="polite">
+      <ion-icon aria-hidden="true" name="flame-outline"></ion-icon>
+      <div>
+        <p class="streak-value">{{ workout.streak() }}</p>
+        <p class="streak-label">day streak</p>
+      </div>
+    </section>
+
+    @if (workout.completedHistory().length === 0) {
+      <p class="empty">Complete all 400 reps to start a streak.</p>
+    } @else {
+      <h2>Completed days</h2>
+      <ion-list [inset]="true">
+        @for (day of workout.completedHistory(); track day.date) {
+          <ion-item>
+            <ion-icon aria-hidden="true" name="checkmark-circle" slot="start" color="primary"></ion-icon>
+            <ion-label>{{ day.label }}</ion-label>
+            <ion-note slot="end">400 reps</ion-note>
+          </ion-item>
+        }
+      </ion-list>
+    }
+  </div>
+</ion-content>

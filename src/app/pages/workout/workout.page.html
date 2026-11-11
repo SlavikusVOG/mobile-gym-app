@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/today"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ exercise()?.name ?? 'Workout' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (workout.isDayComplete()) {
+    <div class="page complete-state">
+      <ion-icon aria-hidden="true" name="trophy-outline" class="trophy"></ion-icon>
+      <h2>Day complete</h2>
+      <p>100 squats, 100 push-ups, 100 side knee raises, and 100 cross-knee raises.</p>
+      <ion-button expand="block" size="large" (click)="backToToday()">Back to Today</ion-button>
+    </div>
+  } @else if (exercise(); as current) {
+    <div class="page">
+      <p class="reps" aria-live="polite">
+        {{ completedReps() }} / {{ targetReps }}
+      </p>
+      <p class="sets">{{ completedSets() }} of {{ setsPerExercise }} sets</p>
+
+      <div class="set-grid" aria-hidden="true">
+        @for (set of setNumbers; track set) {
+          <span class="set-pill" [class.done]="set <= completedSets()">{{ set }}</span>
+        }
+      </div>
+    </div>
+  }
+</ion-content>
+
+@if (!workout.isDayComplete() && exercise(); as current) {
+  <ion-footer class="ion-no-border">
+    <div class="actions">
+      <ion-button
+        class="set-done"
+        expand="block"
+        size="large"
+        (click)="completeSet()"
+        [disabled]="isExerciseComplete()"
+        [attr.aria-label]="'Mark set of 10 ' + current.name + ' done'"
+      >
+        Set done
+      </ion-button>
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="undoSet()"
+        [disabled]="completedSets() === 0"
+      >
+        <ion-icon aria-hidden="true" slot="start" name="arrow-undo-outline"></ion-icon>
+        Undo last set
+      </ion-button>
+    </div>
+  </ion-footer>
+}
