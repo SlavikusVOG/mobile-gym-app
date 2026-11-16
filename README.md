@@ -50,15 +50,19 @@ That installs **Daily 100** on the device. After code changes, run `npx ng build
 
 If the phone does not appear, try another cable or check `adb devices`.
 
-## Use on a phone without Android Studio
+## Install as a PWA (Chrome)
 
-On the same Wi-Fi as your computer:
+Chrome’s **Install** button on Android asks Google to mint a real APK (WebAPK). That only works from a **stable public HTTPS site**. A LAN IP or a `*.trycloudflare.com` tunnel almost always shows **This app cannot be installed**.
 
-```bash
-npx ng serve --host 0.0.0.0 --port 8100
-```
+**What works from a tunnel or LAN right now**
 
-Open `http://YOUR_PC_IP:8100` in the phone browser. In Chrome you can **Add to Home screen**. This is a web shortcut, not a full native install (haptics and similar native features are limited).
+1. Open Daily 100 in Chrome.
+2. Wait a couple of seconds, then **reload** the tab (the service worker must control the page).
+3. Chrome menu → **Install and create shortcut** → **Create shortcut**.
+
+That puts Daily 100 on the home screen. It still opens through Chrome.
+
+A true standalone **Install** needs the app hosted on a public domain (Vercel, Netlify, Firebase, etc.), or a native Android build with Android Studio (see above).
 
 ## Project layout
 
